@@ -7,7 +7,21 @@ function applyCustomSort() {
   [].__proto__.sort2 = function (compareFunction) {
     // write code here
     const cmp =
-      compareFunction ?? ((a, b) => (a.toString() >= b.toString() ? 1 : -1));
+      compareFunction ??
+      ((a, b) => {
+        const stringA = String(a);
+        const stringB = String(b);
+
+        if (stringA < stringB) {
+          return -1;
+        }
+
+        if (stringA > stringB) {
+          return 1;
+        }
+
+        return 0;
+      });
 
     for (let i = 0; i < this.length; i++) {
       for (let k = i + 1; k < this.length; k++) {

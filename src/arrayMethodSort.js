@@ -6,15 +6,13 @@
 function applyCustomSort() {
   [].__proto__.sort2 = function (compareFunction) {
     // write code here
-    const cmp = compareFunction ?? ((a, b) => a.toString() >= b.toString());
+    const cmp =
+      compareFunction ?? ((a, b) => String(a).localeCompare(String(b)));
 
     for (let i = 0; i < this.length; i++) {
       for (let k = i + 1; k < this.length; k++) {
         if (cmp(this[i], this[k]) > 0) {
-          const temp = this[i];
-
-          this[i] = this[k];
-          this[k] = temp;
+          [this[i], this[k]] = [this[k], this[i]];
         }
       }
     }
